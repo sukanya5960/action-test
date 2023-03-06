@@ -9,7 +9,7 @@ jobs:
               uses: actions/checkout@v2
             - run: echo " repo ${{ github.repository }} has cloned to runner
             - name: list files in repo
-            - run: |
+              run: |
                ls ${{ github.workspace }}
             - run: echo "this job status is ${{ job.status }}"
             
