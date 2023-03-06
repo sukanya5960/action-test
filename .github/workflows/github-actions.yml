@@ -7,7 +7,7 @@ jobs:
             - run: echo "job triggered by ${{ github.event_name }} event"
             - name: checkout repo code
               uses: actions/checkout@v3
-            - run: echo " repo ${{ github.repository }} has cloned to runner
+            - run: echo " repo ${{ github.repository }} has cloned to runner"
             - name: list files in repo
               run: |
                ls ${{ github.workspace }}
