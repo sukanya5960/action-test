@@ -2,14 +2,14 @@ name: GitHub Actions Demo
 on: [push]
 jobs:
     explore-github-actions:
-    runs-on: ubuntu-latest
-    steps:
-        - run: echo "job triggered by ${{ github.event_name }} event"
-#         - name: checkout repo code
-#           uses: actions/checkout@v2
-#         - run: echo " repo ${{ github.repository }} has cloned to runner
-#         - name: list files in repo
-#         - run: |
-#               ls ${{ github.workspace }}
-#         - run: echo "this job status is ${{ job.status }}"
+        runs-on: ubuntu-latest
+        steps:
+            - run: echo "job triggered by ${{ github.event_name }} event"
+            - name: checkout repo code
+              uses: actions/checkout@v2
+            - run: echo " repo ${{ github.repository }} has cloned to runner
+            - name: list files in repo
+            - run: |
+               ls ${{ github.workspace }}
+            - run: echo "this job status is ${{ job.status }}"
             
