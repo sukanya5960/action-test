@@ -1,0 +1,11 @@
+name: deploy-release-candidate
+on:
+  release:
+    types:
+      - published
+jobs:
+  build-and-deploy-release-candidate:
+    name: Build and deploy release candidate
+    runs-on: ubuntu-latest
+    steps:
+        - run: echo "job triggered by ${{ github.event_name }} event"
