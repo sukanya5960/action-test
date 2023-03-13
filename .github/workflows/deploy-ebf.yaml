@@ -1,0 +1,11 @@
+name: deploy-ebf
+on:
+  push:
+    branches:
+      - 'ebf_*'
+jobs:
+  build-and-deploy-ebf:
+    name: Build and deploy ebf
+    runs-on: ubuntu-latest
+    steps:
+        - run: echo "job triggered by ${{ github.event_name }} event"
