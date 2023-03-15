@@ -10,7 +10,7 @@ on:
       - synchronize
 jobs:
   build-and-deploy-ebf:
-    if: ${{(github.base_ref == 'ebf_*')}}
+    if: ${{github.base_ref == 'ebf_*'}}
     name: Build and deploy ebf
     runs-on: ubuntu-latest
     steps:
