@@ -5,7 +5,7 @@ on:
       - 'ebf_*'
 jobs:
   build-and-deploy-ebf:
-    if: github.ref_name == 'ebf_2.1'
+    if: github.ref_name == 'ebf_2.*'
     name: Build and deploy ebf
     runs-on: ubuntu-latest
     steps:
