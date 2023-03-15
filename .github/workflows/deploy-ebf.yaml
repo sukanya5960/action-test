@@ -2,10 +2,9 @@ name: deploy-ebf
 on:
   push:
     branches:
-      - 'ebf_*'
+      - 'ebf_[0-9]+.[0-9]+.[0-9]+_[0-9]'
 jobs:
   build-and-deploy-ebf:
-    if: github.ref_name == 'ebf_2*'
     name: Build and deploy ebf
     runs-on: ubuntu-latest
     steps:
