@@ -1,6 +1,6 @@
 name: deploy-ebf
 on:
-  pull_request::
+  pull_request:
     branches:
       - 'ebf_*'
       - dev1
@@ -10,14 +10,13 @@ on:
       - synchronize
 jobs:
   build-and-deploy-ebf:
-    if github.base_ref == 'ebf_*'
+    if: github.base_ref == 'ebf_*'
     name: Build and deploy ebf
     runs-on: ubuntu-latest
     steps:
         - run: echo "job triggered by ${{ github.event_name }} ${{ github.base_ref }} event"
- 
-   build-and-deploy-ebf:
-    if ${{ (github.base_ref == 'dev1') || (github.base_ref == 'main1') }}
+  build-and-deploy-dev:
+    if: ${{ (github.base_ref == 'dev1') || (github.base_ref == 'main1') }}
     name: Build and deploy dev
     runs-on: ubuntu-latest
     steps:
