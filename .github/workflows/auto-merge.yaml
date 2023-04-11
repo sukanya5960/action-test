@@ -9,6 +9,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 #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
 
       - name: Configure AWS Credentials
