@@ -1,13 +1,15 @@
 name: GitHub Actions Auto-merge
 # on:
 #     schedule:
-#         - cron: '*/1 * * * *'
+#         - cron: '*/15 * * * *'
 jobs:
   merge:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - name: Merge main2 into stage2
         run: |
