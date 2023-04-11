@@ -1,0 +1,42 @@
+name: GitHub Actions Auto-merge
+# on:
+#     schedule:
+#         - cron: '*/1 * * * *'
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Merge main2 into stage2
+        run: |
+          git config user.name "sukanya"
+          git config user.email "sukanya5960@gmail.com"
+          git checkout stage2
+          git merge --no-ff main2 -m "Merge main2 into stage via GitHub Actions"
+          git push
+          
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+         aws-region: us-west-2
+          
+      - name: Check for merge conflicts
+        run: |
+          if git ls-files -u; then
+            echo "Merge conflict detected"
+            echo "Sending email alert"
+            # Generate a patch of the merge conflict
+            patch=$(git diff --name-only --diff-filter=U)
+            # Get the full patch contents
+            patch_content=$(git diff -U0 $patch)
+            # Use the patch as the SNS subject
+            # Replace with your AWS CLI command for sending an email notification using Amazon SNS
+            # For example:
+            aws sns publish --topic-arn arn:aws:sns:us-west-2:923801260899:sukanya-test --subject "$patch_content" --message "There is a merge conflict in the repository."
+          else
+            echo "Merge successful"
+          fi
