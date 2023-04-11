@@ -1,7 +1,8 @@
 name: GitHub Actions Auto-merge
 on:
-    schedule:
-        - cron: '*/15 * * * *'
+   workflow_dispatch: {}
+   schedule:
+      - cron: "*/15 * * * *"
 jobs:
   merge:
     runs-on: ubuntu-latest
