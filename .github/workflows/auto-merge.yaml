@@ -52,6 +52,7 @@ jobs:
           else
             echo "Merge successful"
             git status
+            git branch
             git push origin $MERGE_BRANCH
             aws sns publish --topic-arn arn:aws:sns:us-west-2:923801260899:sukanya-test --subject "merge success" --message "Success"
           fi
