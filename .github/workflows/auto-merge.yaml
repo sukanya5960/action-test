@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          ref: ${{ env.MERGE_BRANCH }}
+ #        ref: ${{ env.MERGE_BRANCH }}
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -33,13 +33,12 @@ jobs:
           git config user.email $EMAIL
           git config pull.rebase false
           git fetch --all
-          git checkout origin/$ORIGIN_BRANCH
+          git checkout -b $ORIGIN_BRANCH origin/$ORIGIN_BRANCH
           git pull origin $ORIGIN_BRANCH
-          git checkout origin/$MERGE_BRANCH
+          git checkout -b $MERGE_BRANCH origin/$MERGE_BRANCH
           git pull origin $MERGE_BRANCH
           git branch
-          git merge --commit origin/$ORIGIN_BRANCH -m "Merge $ORIGIN_BRANCH into $MERGE_BRANCH via GitHub Actions" |tee automerge.out
-          git checkout origin/$MERGE_BRANCH
+          git merge --commit $ORIGIN_BRANCH -m "Merge $ORIGIN_BRANCH into $MERGE_BRANCH via GitHub Actions" |tee automerge.out
           git branch
       - name: Merge main3 into stage3
         run: |    
