@@ -1,17 +1,20 @@
 name: GitHub Actions Auto-merge
 on:
    workflow_dispatch: {}
-#    schedule:
-#       - cron: "*/15 * * * *"
+   schedule:
+      - cron: "*/5 * * * *"
+env:
+ USERNAME: "sukanya"
+ EMAIL: "sukanya5960@gmail.com"
+ 
 jobs:
   merge:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-#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
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -22,14 +25,14 @@ jobs:
 
       - name: Merge main2 into stage2
         run: |
-          git config user.name "sukanya"
-          git config user.email "sukanya5960@gmail.com"
+          git config user.name $USERNAME
+          git config user.email $EMAIL
           git reset --hard
           git checkout main2
           git pull origin main2
           git checkout stage2
           git pull origin main2
-          git merge --no-ff main2 -m "Merge main2 into stage via GitHub Actions"
+          git merge --no-ff main2 -m "Merge main2 into stage2 via GitHub Actions"
           
       - name: Check for merge conflicts
         run: |
