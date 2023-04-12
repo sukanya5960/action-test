@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           ref: ${{ env.MERGE_BRANCH }}
@@ -38,6 +38,7 @@ jobs:
           git pull origin $ORIGIN_BRANCH
           git checkout origin/$MERGE_BRANCH
           git pull origin $MERGE_BRANCH
+          git branch
           git merge --commit origin/$ORIGIN_BRANCH -m "Merge $ORIGIN_BRANCH into $MERGE_BRANCH via GitHub Actions" |tee automerge.out
           git checkout origin/$MERGE_BRANCH
           git branch
