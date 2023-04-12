@@ -37,7 +37,7 @@ jobs:
           git pull origin $ORIGIN_BRANCH
           git checkout origin/$MERGE_BRANCH
           git pull origin $MERGE_BRANCH
-          git merge --commit origin/$ORIGIN_BRANCH -m "Merge $ORIGIN_BRANCH into $MERGE_BRANCH via GitHub Actions" |tee automerge.out
+          git merge --commit origin/$ORIGIN_BRANCH --allow-unrelated-histories -m "Merge $ORIGIN_BRANCH into $MERGE_BRANCH via GitHub Actions" |tee automerge.out
       - name: Check for merge conflicts
         run: |
           if grep "Automatic merge failed" automerge.out; then
