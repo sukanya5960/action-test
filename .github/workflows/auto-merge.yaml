@@ -32,7 +32,7 @@ jobs:
           git pull origin main2
           git checkout stage2
           git pull origin main2
-          git merge --no-ff main2 -m "Merge main2 into stage2 via GitHub Actions"
+          git merge --no-ff origin/main2 -m "Merge main2 into stage2 via GitHub Actions"
           
       - name: Check for merge conflicts
         run: |
