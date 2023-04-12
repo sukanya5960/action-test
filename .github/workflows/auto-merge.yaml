@@ -6,6 +6,8 @@ on:
 env:
  USERNAME: "sukanya"
  EMAIL: "sukanya5960@gmail.com"
+ ORIGIN_BRANCH: main
+ MERGE_BRANCH: main1
  
 jobs:
   merge:
@@ -31,11 +33,11 @@ jobs:
           git config pull.rebase false
           git reset --hard
           git fetch --all
-          git checkout origin/main2
-          git pull origin main2
-          git checkout origin/stage2
-          git pull origin main2
-          git merge --commit origin/main2 -m "Merge main2 into stage2 via GitHub Actions"
+          git checkout origin/$ORIGIN_BRANCH
+          git pull origin $ORIGIN_BRANCH
+          git checkout origin/$MERGE_BRANCH
+          git pull origin $MERGE_BRANCH
+          git merge --commit origin/$ORIGIN_BRANCH -m "Merge $ORIGIN_BRANCH into $MERGE_BRANCH via GitHub Actions"
       - name: Check for merge conflicts
         run: |
           if git ls-files -u; then
