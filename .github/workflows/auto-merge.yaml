@@ -36,8 +36,8 @@ jobs:
           git pull origin main2
           git merge --no-ff origin/main2 -m "Merge main2 into stage2 via GitHub Actions"
           
-      - name: Check for merge conflicts
-        run: |
+    # - name: Check for merge conflicts
+    #   run: |
           if git ls-files -u; then
             echo "Merge conflict detected"
             echo "Sending email alert"
