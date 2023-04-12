@@ -32,7 +32,7 @@ jobs:
           git config user.name $USERNAME
           git config user.email $EMAIL
           git config pull.rebase false
-          git pull origin $MERGE_BRANCH
+          git fetch --all
           git checkout origin/$ORIGIN_BRANCH
           git pull origin $ORIGIN_BRANCH
           git checkout origin/$MERGE_BRANCH
@@ -56,8 +56,6 @@ jobs:
             echo "Merge successful"
             rm -rf automerge.out
             git status
-            git branch
-            git checkout origin/$MERGE_BRANCH
             git branch
             git push origin $MERGE_BRANCH
             aws sns publish --topic-arn arn:aws:sns:us-west-2:923801260899:sukanya-test --subject "merge success" --message "Success"
