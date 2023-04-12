@@ -32,6 +32,7 @@ jobs:
           git config user.name $USERNAME
           git config user.email $EMAIL
           git config pull.rebase false
+          git pull origin $MERGE_BRANCH
           git checkout origin/$ORIGIN_BRANCH
           git pull origin $ORIGIN_BRANCH
           git checkout origin/$MERGE_BRANCH
