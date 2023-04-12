@@ -51,6 +51,7 @@ jobs:
             aws sns publish --topic-arn arn:aws:sns:us-west-2:923801260899:sukanya-test --subject "merge conflict" --message "$patch_content"
           else
             echo "Merge successful"
+            em -rf automerge.out
             git status
             git branch
             git checkout origin/$MERGE_BRANCH
