@@ -46,9 +46,9 @@ jobs:
             # Get the full patch contents
             patch_content=$(git diff -U0 $patch)
             # send alert
-            aws sns publish --topic-arn arn:aws:sns:us-west-2:923801260899:sukanya-test --subject "merge status" --message "$patch_content"
+            aws sns publish --topic-arn arn:aws:sns:us-west-2:923801260899:sukanya-test --subject "merge conflict" --message "$patch_content"
           else
             echo "Merge successful"
-            aws sns publish --topic-arn arn:aws:sns:us-west-2:923801260899:sukanya-test --subject "merge status" --message "Success"
+            aws sns publish --topic-arn arn:aws:sns:us-west-2:923801260899:sukanya-test --subject "merge success" --message "Success"
             git push origin stage2
           fi
