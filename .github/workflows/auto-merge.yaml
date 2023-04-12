@@ -35,17 +35,17 @@ jobs:
           git pull origin main2
           git checkout origin/stage2
           git pull origin main2
-          git merge --commit origin/main2 -m "Merge main2 into stage2 via GitHub Actions" >> tee automerge.out
+          git merge --commit origin/main2 -m "Merge main2 into stage2 via GitHub Actions"
       - name: Check for merge conflicts
         run: |
-          set -x
-          git status
-          ls -la
-          git ls-files -u >> mc.txt
-          if [ -s mc.txt ]; then
+          if git ls-files -u; then
+            echo "Merge conflict detected"
+            echo "Sending email alert"
+            # Generate a patch of the merge conflict
             patch=$(git diff --name-only --diff-filter=U)
             # Get the full patch contents
             patch_content=$(git diff -U0 $patch)
+            # send alert
             aws sns publish --topic-arn arn:aws:sns:us-west-2:923801260899:sukanya-test --subject "merge status" --message "$patch_content"
           else
             echo "Merge successful"
