@@ -38,6 +38,8 @@ jobs:
           git checkout origin/$MERGE_BRANCH
           git pull origin $MERGE_BRANCH
           git merge --no-ff --commit origin/$ORIGIN_BRANCH -m "Merge $ORIGIN_BRANCH into $MERGE_BRANCH via GitHub Actions" |tee automerge.out
+      - name: Merge main2 into stage2
+        run: |    
           if grep "Automatic merge failed" automerge.out; then
             echo "Merge conflict detected"
             echo "Sending email alert"
@@ -50,6 +52,8 @@ jobs:
           else
             echo "Merge successful"
             git status
+            git branch
+            git checkout origin/$MERGE_BRANCH
             git branch
             git push origin $MERGE_BRANCH
             aws sns publish --topic-arn arn:aws:sns:us-west-2:923801260899:sukanya-test --subject "merge success" --message "Success"
