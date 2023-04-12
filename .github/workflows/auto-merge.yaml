@@ -38,10 +38,9 @@ jobs:
           git merge --commit origin/main2 -m "Merge main2 into stage2 via GitHub Actions" |tee automerge.out
       - name: Check for merge conflicts
         run: |
-          if grep "Automatic merge failed" automerge.out; then
+          if git ls-files -u; then
             echo "Merge conflict detected"
             echo "Sending email alert"
-            mergestatus="fail";
             # Generate a patch of the merge conflict
             patch=$(git diff --name-only --diff-filter=U)
             # Get the full patch contents
