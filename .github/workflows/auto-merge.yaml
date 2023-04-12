@@ -34,10 +34,11 @@ jobs:
           git pull origin main2
           git checkout origin/stage2
           git pull origin main2
-          git merge --no-ff origin/main2 -m "Merge main2 into stage2 via GitHub Actions"
-          if git ls-files -u; then
+          git merge --no-ff origin/main2 -m "Merge main2 into stage2 via GitHub Actions" |tee automerge.out
+          if grep "Automatic merge failed" automerge.out; then
             echo "Merge conflict detected"
             echo "Sending email alert"
+            mergestatus="fail";
             # Generate a patch of the merge conflict
             patch=$(git diff --name-only --diff-filter=U)
             # Get the full patch contents
