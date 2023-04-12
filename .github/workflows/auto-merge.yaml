@@ -24,6 +24,7 @@ jobs:
          aws-region: us-west-2
 
       - name: Merge main2 into stage2
+        continue-on-error: true
         run: |
           git config user.name $USERNAME
           git config user.email $EMAIL
