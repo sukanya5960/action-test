@@ -43,7 +43,7 @@ jobs:
           ls -la
           mc=$(git ls-files -u)
           echo $mc
-          if mc; then
+          if [ -s mc ]; then
             echo "Merge conflict detected"
             echo "Sending email alert"
             # Generate a patch of the merge conflict
