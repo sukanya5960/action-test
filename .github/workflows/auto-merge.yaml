@@ -28,9 +28,9 @@ jobs:
           git config user.name $USERNAME
           git config user.email $EMAIL
           git reset --hard
-          git checkout main2
+          git checkout origin/main2
           git pull origin main2
-          git checkout stage2
+          git checkout origin/stage2
           git pull origin main2
           git merge --no-ff origin/main2 -m "Merge main2 into stage2 via GitHub Actions"
           
