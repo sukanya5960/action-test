@@ -43,16 +43,10 @@ jobs:
           ls -la
           git ls-files -u >> mc.txt
           if [ -s mc.txt ]; then
-            echo "Merge conflict detected"
-            echo "Sending email alert"
-            # Generate a patch of the merge conflict
             patch=$(git diff --name-only --diff-filter=U)
             # Get the full patch contents
             patch_content=$(git diff -U0 $patch)
-            # Use the patch as the SNS subject
-            # Replace with your AWS CLI command for sending an email notification using Amazon SNS
-            # For example:
-            aws sns publish --topic-arn arn:aws:sns:us-west-2:923801260899:sukanya-test --subject "merge status" --message "$patch_content
+            aws sns publish --topic-arn arn:aws:sns:us-west-2:923801260899:sukanya-test --subject "merge status" --message "$patch_content"
           else
             echo "Merge successful"
             aws sns publish --topic-arn arn:aws:sns:us-west-2:923801260899:sukanya-test --subject "merge status" --message "Success"
