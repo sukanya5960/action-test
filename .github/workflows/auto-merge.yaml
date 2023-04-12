@@ -38,6 +38,7 @@ jobs:
           git checkout origin/$MERGE_BRANCH
           git pull origin $MERGE_BRANCH
           git merge --commit origin/$ORIGIN_BRANCH -m "Merge $ORIGIN_BRANCH into $MERGE_BRANCH via GitHub Actions" |tee automerge.out
+          git branch
       - name: Merge main3 into stage3
         run: |    
           if grep "Automatic merge failed" automerge.out; then
