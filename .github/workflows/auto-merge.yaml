@@ -36,6 +36,8 @@ jobs:
           git checkout origin/stage2
           git pull origin main2
           git merge --commit origin/main2 -m "Merge main2 into stage2 via GitHub Actions" |tee automerge.out
+      - name: Check for merge conflicts
+        run: |
           if grep "Automatic merge failed" automerge.out; then
             echo "Merge conflict detected"
             echo "Sending email alert"
