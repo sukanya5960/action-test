@@ -1,8 +1,8 @@
 name: GitHub Actions Auto-merge
 on:
    workflow_dispatch: {}
-   schedule:
-      - cron: "*/5 * * * *"
+#    schedule:
+#       - cron: "*/5 * * * *"
 env:
  USERNAME: "sukanya"
  EMAIL: "sukanya5960@gmail.com"
