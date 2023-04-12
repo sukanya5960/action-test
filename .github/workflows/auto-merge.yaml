@@ -41,8 +41,9 @@ jobs:
           set -x
           git status
           ls -la
-          git ls-files -u
-          if git ls-files -u; then
+          mc=$(git ls-files -u)
+          echo $mc
+          if mc; then
             echo "Merge conflict detected"
             echo "Sending email alert"
             # Generate a patch of the merge conflict
