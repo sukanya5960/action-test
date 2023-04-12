@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          ref: '$ORIGIN_BRANCH'
+          ref: ${{ env.$ORIGIN_BRANCH }}
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
