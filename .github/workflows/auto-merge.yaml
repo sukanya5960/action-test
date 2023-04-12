@@ -40,7 +40,8 @@ jobs:
         run: |
           set -x
           git status
-          cat automerge.out
+          ls -la
+          git ls-files -u
           if git ls-files -u; then
             echo "Merge conflict detected"
             echo "Sending email alert"
