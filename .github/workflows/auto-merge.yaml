@@ -39,6 +39,8 @@ jobs:
       - name: Check for merge conflicts
         run: |
           set -x
+          git status
+          cat automerge.out
           if git ls-files -u; then
             echo "Merge conflict detected"
             echo "Sending email alert"
