@@ -27,7 +27,7 @@ elif grep "Already up to date" automerge.out; then
     echo "COMPARE_RESULT=$result" >> $GITHUB_OUTPUT
 else
     echo "No merge conflict, please merge main1 to stage1"
-    result=`echo ":negative_squared_cross_mark: No merge conflict detected, Master can be merged to Staging!"`
+    result=`echo ":negative_squared_cross_mark: Master has new changes, Master can be merged to Staging!"`
     echo "COMPARE_RESULT=$result" >> $GITHUB_OUTPUT
     git merge --abort
 fi
