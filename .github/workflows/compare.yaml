@@ -1,0 +1,61 @@
+name: GitHub Actions Auto-merge
+on:
+   workflow_dispatch: {}
+#    schedule:
+#       - cron: "*/5 * * * *"
+env:
+ USERNAME: "sukanya"
+ EMAIL: "sukanya5960@gmail.com"
+ ORIGIN_BRANCH: main1
+ MERGE_BRANCH: stage1
+ 
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+ #        ref: ${{ env.MERGE_BRANCH }}
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+         aws-region: us-west-2
+
+      - name: Merge main2 into stage2
+        continue-on-error: true
+        run: |
+          git config user.name $USERNAME
+          git config user.email $EMAIL
+          git config pull.rebase false
+          git fetch --all
+          git checkout -b $ORIGIN_BRANCH origin/$ORIGIN_BRANCH
+          git pull origin $ORIGIN_BRANCH
+          git checkout -b $MERGE_BRANCH origin/$MERGE_BRANCH
+          git pull origin $MERGE_BRANCH
+          git branch
+          git merge --commit $ORIGIN_BRANCH -m "Merge $ORIGIN_BRANCH into $MERGE_BRANCH via GitHub Actions" |tee automerge.out
+          git branch
+      - name: Merge main3 into stage3
+        run: |    
+          if grep "Automatic merge failed" automerge.out; then
+            echo "Merge conflict detected"
+            echo "Sending email alert"
+            # Generate a patch of the merge conflict
+            patch=$(git diff --name-only --diff-filter=U)
+            # Get the full patch contents
+            patch_content=$(git diff -U0 $patch)
+            # send alert
+            aws sns publish --topic-arn arn:aws:sns:us-west-2:923801260899:sukanya-test --subject "Error merging $ORIGIN_BRANCH into $MERGE_BRANCH " --message "$patch_content"
+          else
+            echo "Merge successful"
+            rm -rf automerge.out
+            git status
+            git branch
+            git push origin $MERGE_BRANCH
+            aws sns publish --topic-arn arn:aws:sns:us-west-2:923801260899:sukanya-test --subject "Success merging $ORIGIN_BRANCH into $MERGE_BRANCH" --message "Success"
+          fi
