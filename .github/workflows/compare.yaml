@@ -18,9 +18,7 @@ jobs:
 
       - name: Compare main1 and main2
         id: branch-compare
-        run: |
-         ${PWD}/ci/branch-compare.sh
-         echo "COMPARE_RESULT=$result" >> $GITHUB_OUTPUT
+        run: ${PWD}/ci/branch-compare.sh
       - name: Send custom JSON data to Slack workflow
         id: slack
         uses: slackapi/slack-github-action@v1.23.0
