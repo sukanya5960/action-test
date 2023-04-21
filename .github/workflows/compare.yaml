@@ -26,13 +26,13 @@ jobs:
           # For posting a rich message using Block Kit
           payload: |
             {
-              "text": "Difference between #${{ env.ORIGIN_BRANCH }} and #${{ env.MERGE_BRANCH }}",
+              "text": "Compare branches result",
               "blocks": [
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "GitHub Action build result: Difference between #${{ env.ORIGIN_BRANCH }} and #${{ env.MERGE_BRANCH }}"
+                    "text": "GitHub Action build result: Difference between #${{ env.ORIGIN_BRANCH }} and #${{ env.MERGE_BRANCH }} is `echo $result`"
                   }
                 }
               ]
