@@ -48,11 +48,13 @@ jobs:
             patch_content=$(git diff -U0 $patch)
             echo $patch_content
             # send alert
+            git merge --abort
           elif grep "Already up to date" automerge.out; then
             echo "Nothing to merge, already up to date"
             git status
             git branch
           else
            echo "No merge conflict, please merge main1 to stage1"
+           git merge --abort
           fi
-          git merge --abort
+          
