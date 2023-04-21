@@ -10,7 +10,7 @@ env:
  MERGE_BRANCH: stage1
  
 jobs:
-  merge:
+  compare:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -32,7 +32,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "GitHub Action build result: Difference between ${{ env.ORIGIN_BRANCH }} and ${{ env.MERGE_BRANCH }} is $result"
+                    "text": "GitHub Action build result: Difference between ${{ env.ORIGIN_BRANCH }} and ${{ env.MERGE_BRANCH }} is ${result}"
                   }
                 }
               ]
