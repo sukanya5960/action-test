@@ -18,16 +18,16 @@ if grep "Automatic merge failed" automerge.out; then
     # Get the full patch contents
     patch_content=$(git diff -U0 $patch)
     echo "Merge conflict detected, Please review files : $patch"
-    result=`echo "Merge conflict detected, Please review files"`
+    result=`echo "Merge conflict detected, Please review files!"`
     echo $result
     echo "COMPARE_RESULT=$result" >> $GITHUB_OUTPUT
     git merge --abort
 elif grep "Already up to date" automerge.out; then
-    result=`echo "Nothing to merge, already up to date"`
+    result=`echo "Nothing to merge, already up to date!"`
     echo "COMPARE_RESULT=$result" >> $GITHUB_OUTPUT
 else
     echo "No merge conflict, please merge main1 to stage1"
-    result=`echo "No merge conflict detected, Master can be merged to Staging"`
+    result=`echo "No merge conflict detected, Master can be merged to Staging!"`
     echo "COMPARE_RESULT=$result" >> $GITHUB_OUTPUT
     git merge --abort
 fi
