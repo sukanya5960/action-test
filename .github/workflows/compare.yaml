@@ -46,7 +46,7 @@ jobs:
             patch=$(git diff --name-only --diff-filter=U)
             # Get the full patch contents
             patch_content=$(git diff -U0 $patch)
-            echo $patch_content
+            echo $patch
             # send alert
             git merge --abort
           elif grep "Already up to date" automerge.out; then
