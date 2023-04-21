@@ -19,6 +19,7 @@ if grep "Automatic merge failed" automerge.out; then
     patch_content=$(git diff -U0 $patch)
     echo $patch
     result=`echo "Merge conflict detected, Please review files : $patch"`
+    echo $result
     git merge --abort
 elif grep "Already up to date" automerge.out; then
     result=`echo "Nothing to merge, already up to date"`
