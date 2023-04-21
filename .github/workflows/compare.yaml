@@ -15,9 +15,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
- #        ref: ${{ env.MERGE_BRANCH }}
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -26,7 +23,7 @@ jobs:
          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
          aws-region: us-west-2
 
-      - name: Merge main2 into stage2
+      - name: Compare main1 and main2
         continue-on-error: true
         run: |
           git config user.name $USERNAME
@@ -38,9 +35,9 @@ jobs:
           git checkout -b $MERGE_BRANCH origin/$MERGE_BRANCH
           git pull origin $MERGE_BRANCH
           git branch
-          git merge --commit $ORIGIN_BRANCH -m "Merge $ORIGIN_BRANCH into $MERGE_BRANCH via GitHub Actions" |tee automerge.out
+          git merge --no-commit --no-ff $ORIGIN_BRANCH  |tee automerge.out
           git branch
-      - name: Merge main3 into stage3
+      - name: Check for merge conflict
         run: |    
           if grep "Automatic merge failed" automerge.out; then
             echo "Merge conflict detected"
@@ -49,13 +46,13 @@ jobs:
             patch=$(git diff --name-only --diff-filter=U)
             # Get the full patch contents
             patch_content=$(git diff -U0 $patch)
+            echo $patch_content
             # send alert
-            aws sns publish --topic-arn arn:aws:sns:us-west-2:923801260899:sukanya-test --subject "Error merging $ORIGIN_BRANCH into $MERGE_BRANCH " --message "$patch_content"
-          else
-            echo "Merge successful"
-            rm -rf automerge.out
+          elif grep "Already up to date" automerge.out; then
+            echo "Nothing to merge, already up to date"
             git status
             git branch
-            git push origin $MERGE_BRANCH
-            aws sns publish --topic-arn arn:aws:sns:us-west-2:923801260899:sukanya-test --subject "Success merging $ORIGIN_BRANCH into $MERGE_BRANCH" --message "Success"
+          else
+           echo "No merge conflict, please merge main1 to stage1"
           fi
+          git merge --abort
