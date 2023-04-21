@@ -32,7 +32,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "Branch comparison result of ${{ env.ORIGIN_BRANCH }} branch and ${{ env.MERGE_BRANCH }} branch is: ${{ steps.branch-compare.outputs.COMPARE_RESULT }}"
+                    "text": "Comparison result of ${{ env.ORIGIN_BRANCH }} branch and ${{ env.MERGE_BRANCH }} branch is: ${{ steps.branch-compare.outputs.COMPARE_RESULT }}"
                   }
                 }
               ]
