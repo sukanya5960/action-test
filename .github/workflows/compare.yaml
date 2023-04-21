@@ -16,7 +16,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Compare main1 and main2
+      - name: Compare Master and Staging
         id: branch-compare
         run: ${PWD}/ci/branch-compare.sh
       - name: Send custom JSON data to Slack workflow
@@ -32,7 +32,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "GitHub Action build result: Difference between ${{ env.ORIGIN_BRANCH }} and ${{ env.MERGE_BRANCH }} is ${{ steps.branch-compare.outputs.COMPARE_RESULT }}"
+                    "text": "Branch comparison result of ${{ env.ORIGIN_BRANCH }} branch and ${{ env.MERGE_BRANCH }} branch is: ${{ steps.branch-compare.outputs.COMPARE_RESULT }}"
                   }
                 }
               ]
