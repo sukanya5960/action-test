@@ -18,7 +18,9 @@ jobs:
 
       - name: Compare main1 and main2
         id: branch-compare
-        run: ${PWD}/ci/branch-compare.sh
+        run: |
+         ${PWD}/ci/branch-compare.sh
+         echo "::set-output name=result::$result"
       - name: Send custom JSON data to Slack workflow
         id: slack
         uses: slackapi/slack-github-action@v1.23.0
@@ -32,7 +34,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "GitHub Action build result: Difference between ${{ env.ORIGIN_BRANCH }} and ${{ env.MERGE_BRANCH }} is ${{ env.result }}"
+                    "text": "GitHub Action build result: Difference between ${{ env.ORIGIN_BRANCH }} and ${{ env.MERGE_BRANCH }} is ${{ steps.branch-compare.outputs.result }}"
                   }
                 }
               ]
