@@ -20,13 +20,14 @@ if grep "Automatic merge failed" automerge.out; then
     echo $patch
     result=`echo "Merge conflict detected, Please review files : $patch"`
     echo $result
+    echo "COMPARE_RESULT=$result" >> $GITHUB_OUTPUT
     git merge --abort
 elif grep "Already up to date" automerge.out; then
     result=`echo "Nothing to merge, already up to date"`
-    git status
-    git branch
+    echo "COMPARE_RESULT=$result" >> $GITHUB_OUTPUT
 else
     echo "No merge conflict, please merge main1 to stage1"
     result=`echo "No merge conflict, please merge main1 to stage1"`
+    echo "COMPARE_RESULT=$result" >> $GITHUB_OUTPUT
     git merge --abort
 fi
