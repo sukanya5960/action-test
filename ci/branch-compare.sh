@@ -3,7 +3,6 @@ set -e
 git config user.name $USERNAME
 git config user.email $EMAIL
 git config pull.rebase false
-git fetch --all
 git checkout -b $ORIGIN_BRANCH origin/$ORIGIN_BRANCH
 git pull origin $ORIGIN_BRANCH
 git checkout -b $MERGE_BRANCH origin/$MERGE_BRANCH
