@@ -17,8 +17,8 @@ if grep "Automatic merge failed" automerge.out; then
     patch=$(git diff --name-only --diff-filter=U)
     # Get the full patch contents
     patch_content=$(git diff -U0 $patch)
-    echo $patch
-    result=`echo "Merge conflict detected, Please review files : $patch"`
+    echo "Merge conflict detected, Please review files : $patch"
+    result=`echo "Merge conflict detected, Please review files"`
     echo $result
     echo "COMPARE_RESULT=$result" >> $GITHUB_OUTPUT
     git merge --abort
