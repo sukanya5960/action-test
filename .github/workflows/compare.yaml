@@ -32,7 +32,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "GitHub Action build result: test"
+                    "text": "GitHub Action build result: Difference between #${{ env.ORIGIN_BRANCH }} and #${{ env.MERGE_BRANCH }}"
                   }
                 }
               ]
