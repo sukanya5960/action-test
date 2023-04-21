@@ -6,7 +6,7 @@ on:
 env:
  USERNAME: "sukanya"
  EMAIL: "sukanya5960@gmail.com"
- ORIGIN_BRANCH: main1
+ ORIGIN_BRANCH: main
  MERGE_BRANCH: stage1
  
 jobs:
