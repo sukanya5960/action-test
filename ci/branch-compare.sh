@@ -24,7 +24,7 @@ if grep "Automatic merge failed" automerge.out; then
     git merge --abort
 elif grep "Already up to date" automerge.out; then
     result=`echo ":white_check_mark: Nothing to merge, already up to date!"`
-    #echo "COMPARE_RESULT=$result" >> $GITHUB_OUTPUT
+    echo "COMPARE_RESULT=$result" >> $GITHUB_OUTPUT
 else
     echo "No merge conflict, please merge main1 to stage1"
     result=`echo ":negative_squared_cross_mark: Master has new changes, Master can be merged to Staging!"`
