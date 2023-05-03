@@ -20,6 +20,7 @@ jobs:
         id: branch-compare
         run: ${PWD}/ci/branch-compare.sh
       - name: Send custom JSON data to Slack workflow
+        if: steps.branch-compare.outputs.COMPARE_RESULT != null
         id: slack
         uses: slackapi/slack-github-action@v1.23.0
         with:
