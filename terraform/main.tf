@@ -3,11 +3,11 @@
 
 
 terraform {
-  required_version = "~> 1.1.7"
+  required_version = "~> 1.3.1"
   required_providers {
     newrelic = {
       source  = "newrelic/newrelic"
-      version = "~> 2.22.1"
+      #version = "~> 2.22.1"
     }
   }
 }
@@ -19,7 +19,7 @@ terraform {
   backend "s3" {
     bucket = "alo-newrelic-tf-state-test"
     key    = "alo-newrelic-tf-state-test/newrelic.tfstate"
-    region = "eu-east-1"
+    region = "us-east-1"
     profile = "default"
   }
 }
