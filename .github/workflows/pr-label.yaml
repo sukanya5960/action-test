@@ -8,7 +8,7 @@ on:
       - opened
       - synchronize
       - labeled
-
+#test
 jobs:
   build:
     if: ${{ contains(github.event.pull_request.labels.*.name, 'prod-preview') }}
