@@ -3,12 +3,11 @@ name: CI
 on:
   pull_request:
     branches:
-      - main
+      - rc_test
     types:
       - opened
       - synchronize
       - labeled
-      - edited
 
 jobs:
   build-and-deploy-dev-preview:
