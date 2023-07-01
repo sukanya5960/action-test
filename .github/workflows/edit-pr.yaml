@@ -8,6 +8,7 @@ on:
       - opened
       - synchronize
       - labeled
+      - edited
 
 jobs:
   build-and-deploy-dev-preview:
