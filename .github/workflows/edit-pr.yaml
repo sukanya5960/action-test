@@ -13,7 +13,6 @@ on:
 
 jobs:
   build-and-deploy-dev-preview:
-    if: github.base_ref == 'main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
