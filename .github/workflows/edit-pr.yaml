@@ -13,9 +13,8 @@ on:
 
 jobs:
   build-and-deploy-dev-preview:
-    if: github.base_ref == 'main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Run a one-line script
-        run: echo Hello, world!
+        run: echo Hello, world rc!
