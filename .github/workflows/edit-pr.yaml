@@ -10,6 +10,8 @@ on:
       - labeled
       - reopened
 
+#test
+
 jobs:
   build-and-deploy-dev-preview:
     if: github.base_ref == 'main'
